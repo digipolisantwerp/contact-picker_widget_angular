@@ -6,32 +6,24 @@ import {
   Output,
   ViewChild,
   ElementRef,
-} from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
-import {
-  Observable,
-  Observer,
-} from 'rxjs';
-import {
-  debounceTime,
-  mergeMap,
-} from 'rxjs/operators';
+} from "@angular/core";
+import { ControlValueAccessor } from "@angular/forms";
+import { Observable, Observer } from "rxjs";
+import { debounceTime, mergeMap } from "rxjs/operators";
 
-import { AutoCompleteComponent } from '@acpaas-ui/ngx-forms';
-import { ContactPickerValue } from './contact-picker.types';
-import { ContactPickerService } from './contact-picker.service';
-import withUniqueNames from './unique-names';
+import { AutoCompleteComponent } from "@acpaas-ui/ngx-forms";
+import { ContactPickerValue } from "./contact-picker.types";
+import { ContactPickerService } from "./contact-picker.service";
+import withUniqueNames from "./unique-names";
 
 @Component({
-  selector: 'aui-contact-picker',
-  templateUrl: './contact-picker.component.html',
-  styleUrls: ['./contact-picker.component.scss']
+  selector: "aui-contact-picker",
+  templateUrl: "./contact-picker.component.html",
+  styleUrls: ["./contact-picker.component.scss"],
 })
-export class ContactPickerComponent
 // ControlValueAccessor as per
 // https://blog.thoughtram.io/angular/2016/07/27/custom-form-controls-in-angular-2.html
-implements OnInit, ControlValueAccessor {
-
+export class ContactPickerComponent implements OnInit, ControlValueAccessor {
   // see set data below
   private _data: ContactPickerValue[];
 
@@ -41,15 +33,15 @@ implements OnInit, ControlValueAccessor {
    */
   @Input() public url;
   /** Unique ID for the contact picker */
-  @Input() public id = '';
+  @Input() public id = "";
   /** what to show in the input field when blank */
-  @Input() public placeholder = '';
+  @Input() public placeholder = "";
   /** minimum number of characters typed before search is triggered */
   @Input() public minLength = 2;
   /** message to show when there are no hits */
-  @Input() public noDataMessage = 'Geen resultaat gevonden';
+  @Input() public noDataMessage = "Geen resultaat gevonden";
   /** a value object property to show as differentiator (aside from name) */
-  @Input() public differentiator = '';
+  @Input() public differentiator = "";
   /** the value that is displayed */
   @Input() public value: ContactPickerValue;
   /** how long to buffer keystrokes before requesting search results */
@@ -88,13 +80,13 @@ implements OnInit, ControlValueAccessor {
   constructor(
     private personPickerService: ContactPickerService,
     private element: ElementRef
-    ) {}
+  ) {}
 
   /** Set the focus in the text field, selecting all text. */
   public focus() {
     const nativeEl = this.element.nativeElement;
     if (nativeEl && nativeEl.querySelector) {
-      const input = nativeEl.querySelector('input[type=text]');
+      const input = nativeEl.querySelector("input[type=text]");
       if (input) {
         input.select();
       }
@@ -108,15 +100,18 @@ implements OnInit, ControlValueAccessor {
     Observable.create((observer) => {
       this.searchChange$ = observer;
     })
-    .pipe(
-      debounceTime(this.bufferInputMs),
-      mergeMap((search) =>
-        this.personPickerService.getPeopleByQuery(this.data || this.url, search.toString())
+      .pipe(
+        debounceTime(this.bufferInputMs),
+        mergeMap((search) =>
+          this.personPickerService.getPeopleByQuery(
+            this.data || this.url,
+            search.toString()
+          )
         )
       )
-    .subscribe((results) => {
-      this.searchResults = withUniqueNames(results);
-    });
+      .subscribe((results) => {
+        this.searchResults = withUniqueNames(results);
+      });
   }
 
   /** revert the search results to the current value of the control */
@@ -153,14 +148,17 @@ implements OnInit, ControlValueAccessor {
 
   public formatLabel(input: ContactPickerValue): string {
     const search = this.autocomplete.query;
-    const inputString = input.name || input.id || '';
-    const regEx = new RegExp(search, 'ig');
-    return inputString.replace(regEx, (match) => '<strong>' + match + '</strong>');
+    const inputString = input.name || input.id || "";
+    const regEx = new RegExp(search, "ig");
+    return inputString.replace(
+      regEx,
+      (match) => "<strong>" + match + "</strong>"
+    );
   }
 
   // ControlValueAccessor interface
 
-  public writeValue(value: ContactPickerValue|any) {
+  public writeValue(value: ContactPickerValue | any) {
     this.value = value as ContactPickerValue;
     this.valueChange.emit(this.value);
     if (this.propagateChange) {
@@ -174,5 +172,4 @@ implements OnInit, ControlValueAccessor {
   }
 
   public registerOnTouched() {}
-
 }

@@ -11,10 +11,18 @@
       [noResultsText]="noDataMessage"
       [results]="searchResults"
       (search)="onSearch($event)"
-      (select)="onSelect($event)">
+      (select)="onSelect($event)"
+    >
       <ng-template let-item>
-        <span class="m-contact-picker__content" [innerHTML]="formatLabel(item)"></span>
-        <small *ngIf="differentiator" class="m-contact-picker__detail u-text-light u-no-margin u-margin-left-xs">{{ item[differentiator] }}</small>
+        <span
+          class="m-contact-picker__content"
+          [innerHTML]="formatLabel(item)"
+        ></span>
+        <small
+          *ngIf="differentiator"
+          class="m-contact-picker__detail u-text-light u-no-margin u-margin-left-xs"
+          >{{ item[differentiator] }}</small
+        >
       </ng-template>
     </aui-auto-complete>
   </div>
