@@ -19,7 +19,7 @@ import withUniqueNames from "./unique-names";
 @Component({
   selector: "aui-contact-picker",
   templateUrl: "./contact-picker.component.html",
-  styleUrls: ["./contact-picker.component.scss"],
+  // styleUrls: ["./contact-picker.component.scss"],
 })
 // ControlValueAccessor as per
 // https://blog.thoughtram.io/angular/2016/07/27/custom-form-controls-in-angular-2.html
