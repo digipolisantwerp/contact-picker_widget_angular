@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { DemoLocalPage } from './demo-local';\nimport { DemoRemotePage } from './demo-remote';\nimport { NoContentPage } from './no-content.page';\nexport const Pages = [NoContentPage, DemoLocalPage, DemoRemotePage];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
