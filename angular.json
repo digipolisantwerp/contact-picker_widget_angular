@@ -70,19 +70,13 @@
             "karmaConfig": "./karma.conf.js",
             "polyfills": "example/polyfills.ts",
             "tsConfig": "example/tsconfig.spec.json",
-            "scripts": [],
-            "styles": ["example/styles.scss"],
-            "assets": ["example/assets", "example/favicon.ico"]
+            "scripts": []
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "example/tsconfig.app.json",
-              "example/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": ["example/**/*.ts", "example/**/*.html"]
           }
         }
       }
@@ -100,10 +94,9 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": ["e2e/**/*.ts", "e2e/**/*.html"]
           }
         }
       }
@@ -119,6 +112,7 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }
