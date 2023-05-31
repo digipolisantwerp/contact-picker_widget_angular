@@ -16,14 +16,10 @@
             "main": "example/main.ts",
             "tsConfig": "example/tsconfig.app.json",
             "polyfills": "example/polyfills.ts",
-            "assets": [
-              "example/assets",
-              "example/favicon.ico"
-            ],
-            "styles": [
-              "example/styles.scss"
-            ],
-            "scripts": []
+            "assets": ["example/assets", "example/favicon.ico"],
+            "styles": ["example/styles.scss"],
+            "scripts": [],
+            "allowedCommonJsDependencies": ["date-fns-tz"]
           },
           "configurations": {
             "prod": {
@@ -38,7 +34,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -76,13 +71,8 @@
             "polyfills": "example/polyfills.ts",
             "tsConfig": "example/tsconfig.spec.json",
             "scripts": [],
-            "styles": [
-              "example/styles.scss"
-            ],
-            "assets": [
-              "example/assets",
-              "example/favicon.ico"
-            ]
+            "styles": ["example/styles.scss"],
+            "assets": ["example/assets", "example/favicon.ico"]
           }
         },
         "lint": {
@@ -92,9 +82,7 @@
               "example/tsconfig.app.json",
               "example/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -115,22 +103,16 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
     }
   },
-  "defaultProject": "contact-picker_widget_angular",
   "schematics": {
-    "@schematics/angular:class": {
-      "spec": false
-    },
+    "@schematics/angular:class": {},
     "@schematics/angular:component": {
-      "prefix": "app",
-      "styleext": "scss"
+      "prefix": "app"
     },
     "@schematics/angular:directive": {
       "prefix": "app"
